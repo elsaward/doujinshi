@@ -6,7 +6,7 @@ function checkAnswer(num, answer) {
     ['彦岛','姬岛'],
     [11],
     ['特殊医疗'],
-    ['老挝'],
+    ['越南'],
     ['澳大利亚','达尔文']
   ];
   answer = decodeURIComponent(answer);
