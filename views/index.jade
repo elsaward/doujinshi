@@ -1,0 +1,34 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    title
+    link(rel='styleSheet', href='/css/bootstrap.min.css')
+    script(src='/js/vue.min.js')
+  body
+    div#quiz.container(style='display: none;')
+      div.page-header
+        h3 答题部分
+      div.progress
+        div#progressBar.progress-bar.progress-bar-info(style='width: {{percent}}')
+      div.panel.panel-default
+        div.panel-heading
+          h3.panel-title {{title}}
+        div.panel-body
+          partial(':name'='partialId')
+          template(v-for="(index,input) in inputs", track-by="$index",v-if='qnum < quiz.length')
+            div.form-group
+              div.input-group
+                span.input-group-addon {{index+1}}
+                input.form-control(id='ipt{{index+1}}', type='text',
+                placeholder='{{input}}', '@input'='typing')
+          div(v-if='qnum >= quiz.length && !success')
+            div.form-group
+              input.form-control(v-model='name', type='text', placeholder='预订id')
+            div.form-group
+              input.form-control(v-model='email', type='text', placeholder='预订邮箱')
+          p.text-center(v-if='qnum < quiz.length')
+            button.btn.btn-primary(type='button', '@click'='submit') 确认这个答案
+          p.text-center(v-if='qnum >= quiz.length && !success')
+            button.btn.btn-primary(type='button', '@click'='booking') 提交信息
+    script(src='/js/quiz.js')
